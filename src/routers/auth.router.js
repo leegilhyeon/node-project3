@@ -11,6 +11,9 @@ import {
   HASH_SALT_ROUNDS,
 } from '../constants/auth.constant.js';
 import { ACCESS_TOKEN_SECRET } from '../constants/env.constant.js';
+import { AuthController } from '../controllers/auth.controller.js';
+
+const authController = new AuthController();
 
 const authRouter = express.Router();
 
