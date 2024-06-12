@@ -1,3 +1,5 @@
+import { AuthService } from "../services/auth.service.js";
+
 export class AuthController {
     authService = new AuthService();
 
@@ -9,19 +11,22 @@ export class AuthController {
                 email, password, name
             );
 
-            return res.status(201).json({ data: signUpPosts});
+            return res.status(signUpPosts.status).json({signUpPosts});
         } catch(err) {
             next(err)
         }
-    }
+    };
 
     signInPosts = async (req, res, next) => {
-        try{
+        try {
             const { email, password } = req.body;
-            
 
-        } catch(err) {
-            next(err)
-        }
-    }
+            const signInPosts = await this.authService.signInPosts(
+                email, password);
+        
+            return res.status(signInPosts.status).json({signInPosts});
+          } catch (error) {
+            next(error);
+          }
+    };
 }

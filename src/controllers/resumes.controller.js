@@ -1,4 +1,4 @@
-import { ResumesService } from "../services/resumes.service";
+import { ResumesService } from "../services/resumes.service.js";
 
 export class ResumesController {
     resumesService = new ResumesService();
