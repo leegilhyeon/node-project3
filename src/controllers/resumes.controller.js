@@ -1,5 +1,6 @@
 import { HTTP_STATUS } from "../constants/http-status.constant.js";
 import { MESSAGES } from "../constants/message.constant.js";
+import { HttpError } from "../errors/http.error.js";
 
 export class ResumesController {
     constructor(resumesService) {
@@ -49,10 +50,11 @@ export class ResumesController {
             const resume = await this.resumesService.getResume(authorId, id);
 
             if (!resume) {
-              return res.status(HTTP_STATUS.NOT_FOUND).json({
-                status: HTTP_STATUS.NOT_FOUND,
-                message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
-              });
+                throw new HttpError.BadRequest('이력서가 존재하지 않습니다.')
+            //   return res.status(HTTP_STATUS.NOT_FOUND).json({
+            //     status: HTTP_STATUS.NOT_FOUND,
+            //     message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
+            //   });
             }
 
             return res.status(HTTP_STATUS.OK).json({
