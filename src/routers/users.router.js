@@ -1,22 +1,16 @@
 import express from 'express';
+import { prisma } from '../utils/prisma.util.js';
 import { requireAccessToken } from '../middlewares/require-access-token.middleware.js';
-import { HTTP_STATUS } from '../constants/http-status.constant.js';
-import { MESSAGES } from '../constants/message.constant.js';
+import { UserController } from '../controllers/user.controller.js';
+import { UserRepository } from '../repositories/users.repository.js';
+import { UserService } from '../services/users.service.js';
+
+const userRepository = new UserRepository(prisma);
+const userService = new UserService(userRepository);
+const userController = new UserController(userService);
 
 const usersRouter = express.Router();
 
-usersRouter.get('/me', requireAccessToken, (req, res, next) => {
-  try {
-    const data = req.user;
-
-    return res.status(HTTP_STATUS.OK).json({
-      status: HTTP_STATUS.OK,
-      message: MESSAGES.USERS.READ_ME.SUCCEED,
-      data,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+usersRouter.get('/me', requireAccessToken, userController.getUser);
 
 export { usersRouter };
