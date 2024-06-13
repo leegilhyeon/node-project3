@@ -1,5 +1,5 @@
-import { HTTP_STATUS } from "../constants/http-status.constant.js";
-import { MESSAGES } from "../constants/message.constant.js";
+
+import { HttpError } from "../errors/http.error.js";
 
 export class ResumeRepository {
     constructor(prisma) {
@@ -48,10 +48,11 @@ export class ResumeRepository {
             where: { id: +id, authorId },
                     });
         if (!resume) {
-            return res.status(HTTP_STATUS.NOT_FOUND).json({
-                status: HTTP_STATUS.NOT_FOUND,
-                message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
-            });
+            throw new HttpError.NotFound('이력서가 존재하지 않습니다.')
+            // return res.status(HTTP_STATUS.NOT_FOUND).json({
+            //     status: HTTP_STATUS.NOT_FOUND,
+            //     message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
+            // });
             }
         const updateResume = await this.prisma.resume.update({
             where: { id: +id, authorId },
@@ -69,10 +70,11 @@ export class ResumeRepository {
         });
     
         if (!resume) {
-            return res.status(HTTP_STATUS.NOT_FOUND).json({
-              status: HTTP_STATUS.NOT_FOUND,
-              message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
-            });
+            throw new HttpError.NotFound('이력서가 존재하지 않습니다.')
+            // return res.status(HTTP_STATUS.NOT_FOUND).json({
+            //   status: HTTP_STATUS.NOT_FOUND,
+            //   message: MESSAGES.RESUMES.COMMON.NOT_FOUND,
+            // });
           }
         
         return this.prisma.resume.delete({ where: { id: +id, authorId } });
