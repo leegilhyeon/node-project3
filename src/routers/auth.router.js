@@ -17,7 +17,7 @@ const authController = new AuthController();
 
 const authRouter = express.Router();
 
-authRouter.post('/sign-up', signUpValidator, authController.signUpPosts)
+authRouter.post('/sign-up', signUpValidator, authController.signUp)
 //    async (req, res, next) => {
 //   try {
 //     const { email, password, name } = req.body;
@@ -54,7 +54,7 @@ authRouter.post('/sign-up', signUpValidator, authController.signUpPosts)
 //   }
 // });
 
-authRouter.post('/sign-in', signInValidator, authController.signInPosts)
+authRouter.post('/sign-in', signInValidator, authController.signIn)
 //   async (req, res, next) => {
 //   try {
 //     const { email, password } = req.body;

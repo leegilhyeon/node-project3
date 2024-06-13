@@ -3,28 +3,26 @@ import { AuthService } from "../services/auth.service.js";
 export class AuthController {
     authService = new AuthService();
 
-    signUpPosts = async (req, res, next) => {
+    signUp = async (req, res, next) => {
         try{
             const { email, password, name } = req.body;
-
-            const signUpPosts = await this.authService.signUpPosts(
+            const signUp = await this.authService.signUp(
                 email, password, name
             );
 
-            return res.status(signUpPosts.status).json({signUpPosts});
+            return res.status(signUp.status).json({signUp});
         } catch(err) {
             next(err)
         }
     };
 
-    signInPosts = async (req, res, next) => {
+    signIn = async (req, res, next) => {
         try {
             const { email, password } = req.body;
-
-            const signInPosts = await this.authService.signInPosts(
+            const signIn = await this.authService.signIn(
                 email, password);
         
-            return res.status(signInPosts.status).json({signInPosts});
+            return res.status(signIn.status).json({signIn});
           } catch (error) {
             next(error);
           }

@@ -7,7 +7,7 @@ import { ACCESS_TOKEN_EXPIRES_IN,HASH_SALT_ROUNDS } from '../constants/auth.cons
 import { ACCESS_TOKEN_SECRET } from '../constants/env.constant.js';
 
 export class AuthService{
-    signUpPosts = async (email, password, name) => {
+    signUp = async (email, password, name) => {
         const existedUser = await prisma.user.findUnique({ where: {email}});
 
         if (existedUser) {
@@ -34,7 +34,7 @@ export class AuthService{
                 data: signUpPosts});
         };
 
-    signInPosts = async (email, password) => {
+    signIn = async (email, password) => {
          const user = await prisma.user.findUnique({ where: { email } });
         
             const isPasswordMatched =
