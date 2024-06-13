@@ -4,7 +4,7 @@ export class UserRepository {
     }
     findById = async(id) => {
         return await this.prisma.user.findUnique({
-            where:{ userId: id}
+            where:{ id}
         })
     }
 }

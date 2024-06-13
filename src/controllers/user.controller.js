@@ -8,7 +8,7 @@ export class UserController {
     getUser = async (req, res, next) => {
         try{
             const {id} = req.user;
-            const user = await this.userService.gerUser(id);
+            const user = await this.userService.getUser(id);
 
         return res.status(HTTP_STATUS.OK).json({
             status: HTTP_STATUS.OK,
