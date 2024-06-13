@@ -10,10 +10,10 @@ export class UserController {
             const {id} = req.user;
             const user = await this.userService.gerUser(id);
 
-    return res.status(HTTP_STATUS.OK).json({
-      status: HTTP_STATUS.OK,
-      message: MESSAGES.USERS.READ_ME.SUCCEED,
-      data: user,})
+        return res.status(HTTP_STATUS.OK).json({
+            status: HTTP_STATUS.OK,
+            message: MESSAGES.USERS.READ_ME.SUCCEED,
+            data: user,})
         } catch(err) {
             next(err)
         }
