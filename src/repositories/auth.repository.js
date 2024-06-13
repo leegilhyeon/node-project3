@@ -1,4 +1,4 @@
-import { HASH_SALT_ROUNDS } from "../constants/auth.constant";
+import { HASH_SALT_ROUNDS } from "../constants/auth.constant.js";
 import bcrypt from 'bcrypt';
 
 export class AuthRepository {
@@ -14,7 +14,7 @@ export class AuthRepository {
     authSignUp = async (email, password, name) => {
         const hashedPassword = bcrypt.hashSync(password, HASH_SALT_ROUNDS);
 
-           const {_password, ...user} = await prisma.user.create({
+           const {_password, ...user} = await this.prisma.user.create({
                 data: {
                   email,
                   password: hashedPassword,

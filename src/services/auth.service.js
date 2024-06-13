@@ -21,14 +21,13 @@ export class AuthService{
         }
         const user = await this.authrepository.authSignUp(email, password, name)
         return {
-          user: {id,
-          email,
-          name,
-          role,
-          createdAt,
-          updatedAt}
-        }
-            
+          user: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        };
         };
 
     signIn = async (email, password) => {
